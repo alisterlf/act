@@ -1,0 +1,9 @@
+<input id="hashtags" type="text" [(ngModel)]="searchquery" [ngModelOptions]="{standalone: true}">
+<label for="hashtags">Search by hashtags</label>
+<button class="waves-effect waves-light btn" (click)="searchcall()">Search</button>
+<hr>
+<div *ngFor="let item of tweetsdata">
+  <img src={{item.user.profile_image_url}}>
+  <h3>{{item.user.name}}</h3>
+  <p>{{item.text}}</p>
+</div>

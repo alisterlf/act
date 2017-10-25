@@ -33,20 +33,7 @@ functions = {
                  res.json({success: true, data:JSON.parse(body.body)});
              }
          })
-    },
-    user: function(req, res){
-        var searchquery = req.body.screenname;
-        var encsearchquery = encodeURIComponent(searchquery);
-        var bearerheader = 'Bearer ' + config.bearertoken;
-        request.get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' + encsearchquery + '&count=2', {headers: {Authorization: bearerheader}}, function(error, body, response) {
-             if(error)
-             console.log(error);
-             else {
-                 res.json({success: true, data:JSON.parse(body.body)});
-             }
-         })
-    }
-    
+    }    
 }
 
 module.exports = functions;

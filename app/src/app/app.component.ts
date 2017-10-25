@@ -7,9 +7,9 @@ import { Http, Headers} from '@angular/http';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'act';
+  title = 'Acesso Soluções de Pagamento S.A. - Twitter Dashboard';
   searchquery = '';
-  tweetsdata = {};
+  tweetsdata;
 
   constructor(private http: Http) { }
 

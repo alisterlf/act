@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "act-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "rajayogan",
+  "author": "alisterlf",
   "license": "MIT",
   "devDependencies": {
     "body-parser": "^1.15.2",

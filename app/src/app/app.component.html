@@ -1,9 +1,40 @@
-<input id="hashtags" type="text" [(ngModel)]="searchquery" [ngModelOptions]="{standalone: true}">
-<label for="hashtags">Search by hashtags</label>
-<button class="waves-effect waves-light btn" (click)="searchcall()">Search</button>
-<hr>
-<div *ngFor="let item of tweetsdata">
-  <img src={{item.user.profile_image_url}}>
-  <h3>{{item.user.name}}</h3>
-  <p>{{item.text}}</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <span class="navbar-brand">{{title}}</span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <form class="form-inline ml-auto">
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" [(ngModel)]="searchquery" [ngModelOptions]="{standalone: true}">
+      <button class="btn btn-success my-2 my-sm-0" type="button" (click)="searchcall()">Buscar</button>
+    </form>
+  </div>
+</nav>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-2">
+      <ul class="list-group">
+        <li class="list-group-item">Cras justo odio</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Morbi leo risus</li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="list-unstyled">
+        <li class="media" *ngFor="let item of tweetsdata">
+          <img class="mr-3 img-thumbnail" [src]="item.user.profile_image_url" alt="Generic placeholder image">
+          <div class="media-body">
+            <time class="float-right">{{item.created_at | date:'medium'}}</time>
+            <h5 class="mt-0 mb-1">
+              {{item.user.name}}
+            </h5>
+            {{item.text}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
   <span class="navbar-brand">{{title}}</span>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -13,28 +13,57 @@
 </nav>
 <div class="container mt-3">
   <div class="row">
-    <div class="col-2">
-      <ul class="list-group">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Morbi leo risus</li>
-        <li class="list-group-item">Porta ac consectetur ac</li>
-        <li class="list-group-item">Vestibulum at eros</li>
-      </ul>
+    <div class="col">
+      <h2 class="mt-1">Resultado de busta por
+        <em>'{{searchquery}}'</em>
+      </h2>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <div class="card border-secondary">
+        <div class="card-header">
+          Histórico
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <a href="https://twitter.com/hashtag/BagulhosSinistros" target="_blanc">#BagulhosSinistros</a>
+          </li>
+          <li class="list-group-item">
+            <a href="https://twitter.com/hashtag/WolvesTODAY" target="_blanc">#WolvesTODAY</a>
+          </li>
+          <li class="list-group-item">
+            <a href="https://twitter.com/hashtag/ToPrecisandoDe" target="_blanc">#ToPrecisandoDe</a>
+          </li>
+          <li class="list-group-item">
+            <a href="https://twitter.com/hashtag/QuartaDetremuraSDV" target="_blanc">#QuartaDetremuraSDV</a>
+          </li>
+          <li class="list-group-item">
+            <a href="https://twitter.com/hashtag/HappyYutaDay" target="_blanc">#HappyYutaDay</a>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="col">
-      <ul class="list-unstyled">
-        <li class="media" *ngFor="let item of tweetsdata">
-          <img class="mr-3 img-thumbnail" [src]="item.user.profile_image_url" alt="Generic placeholder image">
-          <div class="media-body">
-            <time class="float-right">{{item.created_at | date:'medium'}}</time>
-            <h5 class="mt-0 mb-1">
-              {{item.user.name}}
-            </h5>
-            {{item.text}}
-          </div>
-        </li>
-      </ul>
+      <div class="border border-secondary rounded bg-light">
+        <ul class="list-unstyled">
+          <li class="media" *ngFor="let item of tweetsdata">
+            <img class="mr-3 img-thumbnail" [src]="item.user.profile_image_url" alt="Generic placeholder image">
+            <div class="media-body">
+              <time class="float-right">
+                <a href="https://twitter.com/{{item.user.screen_name}}/status/{{item.id_str}}" target="_blanc">{{item.created_at | date:'medium'}}</a>
+              </time>
+              <h5 class="mt-0 mb-1">
+                {{item.user.name}} -
+                <em>@{{item.user.screen_name}}</em>
+              </h5>
+              {{item.text}}
+            </div>
+          </li>
+        </ul>
+
+      </div>
     </div>
   </div>
 </div>

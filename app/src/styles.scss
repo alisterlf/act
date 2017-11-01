@@ -1,9 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../node_modules/bootstrap/scss/bootstrap';
 .media {
     border-bottom: 1px solid #666;
     padding: 10px;
 }
-body {
-  //background: #EEE;
+input[type="button"], input[type="submit"], input[type="reset"], input[type="file"]::-webkit-file-upload-button, button {
+  border-width: 0;
 }

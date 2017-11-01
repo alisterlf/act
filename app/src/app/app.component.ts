@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Headers} from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
 @Component({
   selector: 'act-root',
@@ -9,17 +9,16 @@ import { Http, Headers} from '@angular/http';
 export class AppComponent implements OnInit {
   title = 'Acesso Soluções de Pagamento S.A. - Twitter Dashboard';
   searchquery = '';
+  searchQueryHistory;
   tweetsdata;
+  time;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    this.authorize();
+  }
 
   ngOnInit(): void {
-    this.authorize();
-    const self = this;
-    setTimeout(function() {
-      self.searchquery = '#BagulhosSinistros';
-      self.searchcall();
-    }, 500);
+    this.searchQueryHistory = this.getHistory();
   }
 
   authorize() {
@@ -27,19 +26,38 @@ export class AppComponent implements OnInit {
 
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
 
-    this.http.post('http://localhost:3000/authorize', {headers: headers}).subscribe((res) => {
-      console.log(res);
-    });
+    this.http
+      .post('http://localhost:3000/authorize', { headers: headers })
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 
-  searchcall() {
+  search(formValue, valid) {
+    if (!valid) {
+      return false;
+    }
+    const headers = new Headers();
+    const searchterm = 'query=' + formValue.searchquery;
+
+    headers.append('Content-Type', 'application/X-www-form-urlencoded');
+
+    this.http
+      .post('http://localhost:3000/search', searchterm, { headers: headers })
+      .subscribe(res => {
+        this.tweetsdata = res.json().data.statuses;
+      });
+  }
+
+  getHistory() {
     const headers = new Headers();
     const searchterm = 'query=' + this.searchquery;
 
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
 
-    this.http.post('http://localhost:3000/search', searchterm, {headers: headers}).subscribe((res) => {
-      this.tweetsdata = res.json().data.statuses;
+    this.http.get('http://localhost:3000/history').subscribe(res => {
+      console.log(res.json());
+      this.searchQueryHistory = res.json().data;
     });
   }
 }

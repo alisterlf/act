@@ -14,5 +14,9 @@
     "cors": "^2.8.0",
     "express": "^4.14.0",
     "request": "^2.74.0"
+  },
+  "dependencies": {
+    "lowdb": "^1.0.0",
+    "uuid": "^3.1.0"
   }
 }

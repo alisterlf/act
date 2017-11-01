@@ -1,51 +1,45 @@
-<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark">
   <span class="navbar-brand">{{title}}</span>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <form class="form-inline ml-auto">
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" [(ngModel)]="searchquery" [ngModelOptions]="{standalone: true}">
-      <button class="btn btn-success my-2 my-sm-0" type="button" (click)="searchcall()">Buscar</button>
-    </form>
-  </div>
 </nav>
 <div class="container mt-3">
   <div class="row">
-    <div class="col">
-      <h2 class="mt-1">Resultado de busta por
-        <em>'{{searchquery}}'</em>
-      </h2>
-      <hr>
-    </div>
-  </div>
-  <div class="row">
     <div class="col-3">
-      <div class="card border-secondary">
+      <div class="card bg-light border-secondary mb-2">
         <div class="card-header">
-          Histórico
+          Busca por Hashtag
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <a href="https://twitter.com/hashtag/BagulhosSinistros" target="_blanc">#BagulhosSinistros</a>
-          </li>
-          <li class="list-group-item">
-            <a href="https://twitter.com/hashtag/WolvesTODAY" target="_blanc">#WolvesTODAY</a>
-          </li>
-          <li class="list-group-item">
-            <a href="https://twitter.com/hashtag/ToPrecisandoDe" target="_blanc">#ToPrecisandoDe</a>
-          </li>
-          <li class="list-group-item">
-            <a href="https://twitter.com/hashtag/QuartaDetremuraSDV" target="_blanc">#QuartaDetremuraSDV</a>
-          </li>
-          <li class="list-group-item">
-            <a href="https://twitter.com/hashtag/HappyYutaDay" target="_blanc">#HappyYutaDay</a>
+        <div class="card-body">
+          <form (ngSubmit)="search(searchForm.value, searchForm.valid)" #searchForm="ngForm">
+            <div class="form-group">
+              <label class="sr-only" for="searchquery">Buscar por hashtag</label>
+              <div class="input-group mb-2">
+                <div class="input-group-addon">#</div>
+                <input type="search" class="form-control" id="searchquery" placeholder="Hashtag" name="searchquery" ngModel required>
+              </div>
+              <small id="emailHelp" class="form-text text-muted" [hidden]="!(searchForm.invalid && searchForm.touched)">
+                Campo obrigatório.
+              </small>
+            </div>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+          </form>
+        </div>
+      </div>
+      <div class="card bg-light border-secondary history-list">
+        <div class="card-header">
+          Histórico de busca
+        </div>
+        <ul class="list-unstyled">
+          <li *ngFor="let history of searchQueryHistory">
+            <button type="button" class="btn btn-link">#{{history.searchquery}}</button>
           </li>
         </ul>
       </div>
     </div>
     <div class="col">
+      <h2 class="mt-1">Resultado de busta por
+        <em>'{{searchquery}}'</em>
+      </h2>
+      <hr>
       <div class="border border-secondary rounded bg-light">
         <ul class="list-unstyled">
           <li class="media" *ngFor="let item of tweetsdata">
